@@ -33,14 +33,14 @@
   "A Python syntax and style checker using Pylint. "
   :command ("dartanalyzer" "--format=machine" source)
   :error-patterns
- ((error line-start "ERROR" "|" (message) "|" 
+  ((error line-start "ERROR" "|" (message) "|"
           (file-name) "|" line "|"  column "|" column "|" line-end)
 
-   (warning line-start "WARNING" "|" (message) "|" (message) "|"
-          (file-name) "|" line "|"  column "|" column "|" (message) line-end)
+   (warning line-start "WARNING" "|" (message) "|"
+          (file-name) "|" line "|"  column "|" column "|"  line-end)
 
-   (info line-start "INFO" "|" (message) "|" (message) "|"
-          (file-name) "|" line "|"  column "|" column "|" (message) line-end))
+   (info line-start "INFO" "|" (message) "|"
+          (file-name) "|" line "|"  column "|" column "|"  line-end))
   :modes dart-mode)
 
 
