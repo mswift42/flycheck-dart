@@ -30,19 +30,24 @@
 (require 'flycheck)
 
 (flycheck-define-checker dart
-  "A Python syntax and style checker using Pylint. "
+  "Dart static analyzer using dartanalyze.
+https://github.com/dart-lang/sdk/tree/master/pkg/analyzer_cli#dartanalyzer"
   :command ("dartanalyzer" "--format=machine" source)
   :error-patterns
-  ((error line-start "ERROR" "|" (message) "|"
-          (file-name) "|" line "|"  column "|" column "|" line-end)
+  ((error line-start "ERROR" "|" (= 2 (+ (any "A-Z" "a-z" "0-9" "_")) "|")
+          (file-name) "|" line "|" column "|" (one-or-more (any digit)) "|"
+          (message) line-end)
 
-   (warning line-start "WARNING" "|" (message) "|"
-          (file-name) "|" line "|"  column "|" column "|"  line-end)
+   (warning line-start "WARNING" "|" (= 2 (+ (any "A-Z" "a-z" "0-9" "_")) "|")
+          (file-name) "|" line "|" column "|" (one-or-more (any digit)) "|"
+          (message) line-end)
 
-   (info line-start "INFO" "|" (message) "|"
-          (file-name) "|" line "|"  column "|" column "|"  line-end))
+   (info line-start "INFO" "|" (= 2 (+ (any "A-Z" "a-z" "0-9" "_")) "|")
+          (file-name) "|" line "|" column "|" (one-or-more (any digit)) "|"
+          (message) line-end))
   :modes dart-mode)
 
+(add-to-list 'flycheck-checkers 'dart)
 
 (provide 'flycheck-dart)
 
